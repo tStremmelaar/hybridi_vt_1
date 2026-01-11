@@ -6,7 +6,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function App() {
   const [input, setInput] = useState<string>("")
 
-  const lowerLimit: string = `Lower limit: ${input} bpm`
+  const age: number = !isNaN(Number(input)) === true ? Number(input) : -1
+  const lowerLimit: string = `Lower limit: ${age} bpm`
 
   return (
     <View style={styles.container}>
@@ -18,7 +19,7 @@ export default function App() {
           style={styles.input}
           value={input}
           onChangeText={setInput}
-
+          keyboardType={'numeric'}
         />
         <Text style={styles.text}>{lowerLimit}</Text>
         <Text style={styles.text}>placeholder</Text>
