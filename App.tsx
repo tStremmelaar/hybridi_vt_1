@@ -1,16 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
+  const [input, setInput] = useState<string>("")
+
+  const lowerLimit: string = `Lower limit: ${input} bpm`
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <StatusBar style="auto" />
         <Text style={styles.title}>Heart Rate Limits Calculator</Text>
         <Text style={styles.text}>Enter your age:</Text>
-        <TextInput style={styles.input}></TextInput>
-        <Text style={styles.text}>placeholder</Text>
+        <TextInput
+          style={styles.input}
+          value={input}
+          onChangeText={setInput}
+
+        />
+        <Text style={styles.text}>{lowerLimit}</Text>
         <Text style={styles.text}>placeholder</Text>
       </SafeAreaView>
     </View>
