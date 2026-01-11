@@ -6,8 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function App() {
   const [input, setInput] = useState<string>("")
 
+  // in addition to non-numeric values, negative numbers are ignored
   const age: number = !isNaN(Number(input)) === true ? Number(input) : -1
-  const lowerLimit: string = `Lower limit: ${age} bpm`
+  const lowerLimit: number = age >= 0 ? (220 - age) * 0.65 : 0
+  const upperLimit: number = age >= 0 ? (220 - age) * 0.85 : 0
+  
+  const lowerLimitText: string = `Lower limit: ${lowerLimit.toFixed(2)} bpm`
+  const upperLimitText: string = `Upper limit: ${upperLimit.toFixed(2)} bpm`
 
   return (
     <View style={styles.container}>
@@ -21,8 +26,8 @@ export default function App() {
           onChangeText={setInput}
           keyboardType={'numeric'}
         />
-        <Text style={styles.text}>{lowerLimit}</Text>
-        <Text style={styles.text}>placeholder</Text>
+        <Text style={styles.text}>{lowerLimitText}</Text>
+        <Text style={styles.text}>{upperLimitText}</Text>
       </SafeAreaView>
     </View>
   );
